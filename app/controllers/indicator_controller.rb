@@ -8,7 +8,7 @@ class IndicatorController < ApplicationController
     @indicator = indicator
     indicator.occupied!
     @status = indicator.status
-    brodcast_status
+    broadcast_status
     render 'index'
   end
 
@@ -16,7 +16,7 @@ class IndicatorController < ApplicationController
     @indicator = indicator
     indicator.vacant!
     @status = indicator.status
-    brodcast_status
+    broadcast_status
     render 'index'
   end
 
