@@ -34,14 +34,10 @@ class IndicatorController < ApplicationController
   end
 
   def authenticate_request
-    indicator_options[:key] == auth_token
+    params[:key] == auth_token
   end
 
   def auth_token
     RequestToken.last.authentication
-  end
-
-  def indicator_options
-    params.require(:options).permit(:key)
   end
 end

@@ -5,5 +5,4 @@ Rails.application.routes.draw do
   post '/indicator/vacant', controller: 'indicator', action: 'vacant'
 
   mount ActionCable.server => '/cable'
-
 end
