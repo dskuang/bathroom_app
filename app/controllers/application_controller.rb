@@ -1,3 +1,5 @@
 class ApplicationController < ActionController::Base
-  # protect_from_forgery with: :exception
+  def params
+    super.to_unsafe_h.with_indifferent_access
+  end
 end
