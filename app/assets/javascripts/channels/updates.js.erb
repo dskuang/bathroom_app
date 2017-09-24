@@ -1,0 +1,9 @@
+App.updates = App.cable.subscriptions.create('UpdatesChannel', {
+  received: function(data) {
+    if (data.status) {
+      $('.bathroom-indicator').addClass('red').removeClass('green')
+    } else {
+      $('.bathroom-indicator').removeClass('red').addClass('green')
+    }
+  },
+});
