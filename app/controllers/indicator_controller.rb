@@ -1,5 +1,7 @@
 class IndicatorController < ApplicationController
   before_action :authenticate_request, only: [:occupied, :vacant]
+  before_action :ensure_vacant, only: :occupied
+  before_action :ensure_occupied, only: :vacant
 
   def index
     @status = indicator.status
@@ -27,6 +29,10 @@ class IndicatorController < ApplicationController
     @indicator ||= Indicator.last || Indicator.create!
   end
 
+  def start_of_occupation
+    Time.strptime(params[:time], '%Y-%m-%d %k:%M:%S %Z') if params[:time].present?
+  end
+
   def parse_time
     indicator.start_of_occupation.try(:strftime, '%m/%d/%Y %I:%M%p')
   end
@@ -43,7 +49,11 @@ class IndicatorController < ApplicationController
     RequestToken.last.authentication
   end
 
-  def start_of_occupation
-    Time.strptime(params[:time], '%Y-%m-%d %k:%M:%S %Z') if params[:time].present?
+  def ensure_vacant
+    true if !indicator.status
+  end
+
+  def ensure_occupied
+    true if indicator.status
   end
 end
