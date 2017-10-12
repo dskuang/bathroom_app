@@ -2,8 +2,10 @@ App.updates = App.cable.subscriptions.create('UpdatesChannel', {
   received: function(data) {
     if (data.status) {
       $('.bathroom-indicator').addClass('red').removeClass('green')
+      $('.time-section').html(data.time)
     } else {
       $('.bathroom-indicator').removeClass('red').addClass('green')
+      $('.time-section').html(data.time)
     }
   },
 });
