@@ -1,7 +1,6 @@
 class IndicatorController < ApplicationController
-  before_action :authenticate_request, only: [:occupied, :vacant]
-  before_action :ensure_vacant, only: :occupied
-  before_action :ensure_occupied, only: :vacant
+  before_action :authenticate_request, :ensure_vacant, only: :occupied
+  before_action :authenticate_request, :ensure_occupied, only: :vacant
 
   def index
     @status = indicator.status
