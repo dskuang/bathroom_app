@@ -29,7 +29,10 @@ class IndicatorController < ApplicationController
   end
 
   def start_of_occupation
-    Time.strptime(params[:time], '%Y-%m-%d %k:%M:%S') if params[:time].present?
+    if params[:time].present?
+      time = params[:time] + 'PST'
+      Time.strptime(time, '%Y-%m-%d %k:%M:%S %Z')
+    end
   end
 
   def parse_time
